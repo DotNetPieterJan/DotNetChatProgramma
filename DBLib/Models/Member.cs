@@ -10,9 +10,12 @@ namespace DBLib.Models
     {
         public string Password { get; set; }
         public bool IsOnline { get; set; }
+        private List<Chatroom> approvedChatrooms = new List<Chatroom>();
         public Member(string username, string password, bool isOnline)
         {
+            //get highest LID ID from DB, change ID of class
 
+            //refill approvedChatrooms
         }
         public void MakeRoom(Member member)
         {
@@ -32,19 +35,20 @@ namespace DBLib.Models
         }
         public void AdminKicksMember(Member member)
         {
-
+            approvedChatrooms.Remove(CurrentChatroom);
+            
         }
-        public void AdminDeletesMessage(Message message)
+        public void AdminDeletesMessage(Message message, Chatroom chatroom)
         {
-
+            CurrentChatroom.RemoveMessage(message);
         }
         public void CreatorPromotesMember(Member member)
         {
-
+            CurrentChatroom.AddAdmin(member);
         }
         public void CreatorDemotesMember(Member member)
         {
-
+            CurrentChatroom.RemoveAdmin(member);
         }
 
 

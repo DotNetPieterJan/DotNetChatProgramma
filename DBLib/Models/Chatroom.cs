@@ -12,7 +12,7 @@ namespace DBLib.Models
         public List<Member> Admins { get; private set; }
         public List<Guest> MembersInChatroom { get; private set; }
         public List<Message> Messages { get; private set; }
-        
+
         public Chatroom(Member creator)
         {
             Creator = creator;
