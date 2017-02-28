@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Guest.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
