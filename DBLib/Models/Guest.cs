@@ -10,10 +10,12 @@ namespace DBLib.Models
     {
         public int CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
+        public int ID { get; set; }
         public Guest()
         {
+            ID = GetAvailableNumber();
             CurrentChatroom = 0;
-
+            Username = string.Format("Guest" + ID.ToString());
         }
         public void Register() //converts to Member
         {
@@ -23,8 +25,13 @@ namespace DBLib.Models
         {
             if (currentChatroom == CurrentChatroom)//no hax
             {
-
+                Message messageToPush = new Message(this, DateTime.Now, message);
             }
+        }
+        private int GetAvailableNumber()
+        {
+            Random rdn = new Random();
+            return rdn.Next(1, 50000);
         }
     }
 }
