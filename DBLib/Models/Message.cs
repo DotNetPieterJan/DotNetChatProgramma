@@ -2,7 +2,7 @@
 
 namespace DBLib.Models
 {
-    class Message
+    public class Message
     {
         public Guest Sender { get; private set; }
         public DateTime DateSend { get; private set; }
