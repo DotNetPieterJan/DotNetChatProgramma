@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBLib.Models
 {
-    class Member : Guest
+    public class Member : Guest
     {
         public string Password { get; set; }
         public bool IsOnline { get; set; }

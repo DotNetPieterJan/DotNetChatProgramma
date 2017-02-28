@@ -8,6 +8,6 @@ namespace DBLib.Models
 {
     public class Chatroom
     {
-        public List<>
+        public List<Member>
     }
 }
