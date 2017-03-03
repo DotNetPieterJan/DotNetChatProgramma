@@ -21,6 +21,12 @@ namespace DBLib.Models
 
             //refill approvedChatrooms
         }
+        public Member(string username, string password, bool isOnline)
+        {
+            Username = username;
+            Password = password;
+            IsOnline = IsOnline;
+        }
         public void MakeRoom(Member member)
         {
 
@@ -37,10 +43,9 @@ namespace DBLib.Models
         {
 
         }
-        public void AdminKicksMember(Member member)
+        public void AdminKicksMember(Member memberKicking, Guest personToKick)
         {
-            //approvedChatrooms.Remove(CurrentChatroom);
-            
+            CurrentChatroom.RemoveMemberFromChatroom(memberKicking, personToKick);
         }
         public void AdminDeletesMessage(Message message, Chatroom chatroom)
         {

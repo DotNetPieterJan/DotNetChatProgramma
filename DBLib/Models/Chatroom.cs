@@ -45,9 +45,20 @@ namespace DBLib.Models
         {
             MembersInChatroom.Add(guest);
         }
-        public void RemoveMemberFromChatroom(Guest guest)
+        public void RemoveMemberFromChatroom(Member kicking, Guest guestToKick)
         {
-            MembersInChatroom.Remove(guest);
+            if (kicking == Creator)
+            {
+                MembersInChatroom.Remove(guestToKick);
+            }
+            else if (Admins.Find(m => m.ID == kicking.ID) != null)
+            {
+                MembersInChatroom.Remove(guestToKick);
+            }
+            else
+            {
+                //return error
+            }
         }
     }
 }
