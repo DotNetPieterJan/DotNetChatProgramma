@@ -10,9 +10,13 @@ namespace DBLib.Models
     {
         public string Password { get; set; }
         public bool IsOnline { get; set; }
-        private List<Chatroom> approvedChatrooms = new List<Chatroom>();
-        public Member(string username, string password, bool isOnline)
+        private List<int> approvedChatrooms; //ID
+        public Member(string username, string password, bool isOnline, List<int> approvedChatrooms)
         {
+            Username = username;
+            Password = password;
+            IsOnline = IsOnline;
+            this.approvedChatrooms = approvedChatrooms;
             //get highest LID ID from DB, change ID of class
 
             //refill approvedChatrooms
@@ -35,7 +39,7 @@ namespace DBLib.Models
         }
         public void AdminKicksMember(Member member)
         {
-            approvedChatrooms.Remove(CurrentChatroom);
+            //approvedChatrooms.Remove(CurrentChatroom);
             
         }
         public void AdminDeletesMessage(Message message, Chatroom chatroom)
