@@ -11,6 +11,12 @@ namespace DBLib.Models
         public Chatroom CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
         public int ID { get; set; }
+        public Guest(Chatroom currentChatroom, string username, int id)
+        {
+            CurrentChatroom = currentChatroom;
+            Username = username;
+            ID = id;
+        }
         public Guest()
         {
             ID = GetAvailableNumber();
@@ -20,18 +26,19 @@ namespace DBLib.Models
         }
         public void Register() //converts to Member
         {
-            Console.WriteLine("");
+            Console.WriteLine("Input your new username: ");
+            string username = Console.ReadLine().Trim();
+            Console.WriteLine("Input your new password :");
+            string password = Console.ReadLine().Trim();
+            Member newMember = new Member(username, password, true);
             //inform DB that this ID is good to clear
-
-
+            //delete this guest from guestdb
         }
-        public void SendMessage(Chatroom currentChatroom, string message) //send message to CurrentChatroom
+        public void SendMessage(string message) //send message to CurrentChatroom
         {
-            if (currentChatroom == CurrentChatroom)//no hax
-            {
-                Message messageToPush = new Message(this, DateTime.Now, message);
-                //push to chatroom
-            }
+            Message messageToPush = new Message(this, DateTime.Now, message);
+            CurrentChatroom.AddMessage(messageToPush);
+
         }
         private int GetAvailableNumber()
         {
