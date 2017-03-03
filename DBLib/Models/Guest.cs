@@ -8,10 +8,10 @@ namespace DBLib.Models
 {
     public class Guest
     {
-        public Chatroom CurrentChatroom { get; set; } //ID
+        public int CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
         public int ID { get; set; }
-        public Guest(Chatroom currentChatroom, string username, int id)
+        public Guest(int currentChatroom, string username, int id)
         {
             CurrentChatroom = currentChatroom;
             Username = username;
@@ -37,7 +37,7 @@ namespace DBLib.Models
         public void SendMessage(string message) //send message to CurrentChatroom
         {
             Message messageToPush = new Message(this, DateTime.Now, message);
-            CurrentChatroom.AddMessage(messageToPush);
+            //CurrentChatroom.AddMessage(messageToPush);
 
         }
         private int GetAvailableNumber()

@@ -45,19 +45,19 @@ namespace DBLib.Models
         }
         public void AdminKicksMember(Member memberKicking, Guest personToKick)
         {
-            CurrentChatroom.RemoveMemberFromChatroom(memberKicking, personToKick);
+            //CurrentChatroom.RemoveMemberFromChatroom(memberKicking, personToKick);
         }
         public void AdminDeletesMessage(Message message, Chatroom chatroom)
         {
-            CurrentChatroom.RemoveMessage(message);
+            //CurrentChatroom.RemoveMessage(message);
         }
         public void CreatorPromotesMember(Member member)
         {
-            CurrentChatroom.AddAdmin(member);
+            //CurrentChatroom.AddAdmin(member);
         }
         public void CreatorDemotesMember(Member member)
         {
-            CurrentChatroom.RemoveAdmin(member);
+            //CurrentChatroom.RemoveAdmin(member);
         }
 
 
