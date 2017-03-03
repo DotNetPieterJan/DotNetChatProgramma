@@ -9,29 +9,29 @@ namespace DBLib.Models
     public class Chatroom
     {
         public int ID { get; private set; }
-        public Member Creator { get; private set; }
-        public List<Member> Admins { get; private set; }
-        public List<Guest> MembersInChatroom { get; private set; }
+        public int Creator { get; private set; } //ID creator
+        public List<int> Admins { get; private set; } //ID memebers
+        public List<int> MembersInChatroom { get; private set; } //ID members
         public List<Message> Messages { get; private set; }
 
-        public Chatroom(Member creator) : this(0, creator, new List<Member>(), new List<Guest>(), new List<Message>()) { }
+        public Chatroom(Member creator) : this(0, creator.ID, new List<int>(), new List<int>(), new List<Message>()) { }
 
-        public Chatroom(int id, Member creator, List<Member> admins, List<Guest> memebersInChatroom, List<Message> messages)
+        public Chatroom(int id, int creator, List<int> admins, List<int> memebersInChatroom, List<Message> messages)
         {
             ID = id;
             Creator = creator;
-            Admins = new List<Member>();
-            MembersInChatroom = new List<Guest>();
-            Messages = new List<Message>();
+            Admins = admins;
+            MembersInChatroom = memebersInChatroom;
+            Messages = messages;
         }
 
         public void AddAdmin(Member member)
         {
-            Admins.Add(member);
+            Admins.Add(member.ID);
         }
         public void RemoveAdmin(Member member)
         {
-            Admins.Remove(member);
+            Admins.Remove(member.ID);
         }
         public void AddMessage(Message message)
         {
@@ -43,21 +43,17 @@ namespace DBLib.Models
         }
         public void AddMemberToChatroom(Guest guest)
         {
-            MembersInChatroom.Add(guest);
+            MembersInChatroom.Add(guest.ID);
         }
         public void RemoveMemberFromChatroom(Member kicking, Guest guestToKick)
         {
-            if (kicking == Creator)
+            if (kicking.ID == Creator)
             {
-                MembersInChatroom.Remove(guestToKick);
+                MembersInChatroom.Remove(guestToKick.ID);
             }
-            else if (Admins.Find(m => m.ID == kicking.ID) != null)
+            else if (Admins.Contains(kicking.ID))
             {
-                MembersInChatroom.Remove(guestToKick);
-            }
-            else
-            {
-                //return error
+                MembersInChatroom.Remove(guestToKick.ID);
             }
         }
     }
