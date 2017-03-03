@@ -8,13 +8,17 @@ namespace DBLib.Models
 {
     public class Chatroom
     {
+        public int ID { get; private set; }
         public Member Creator { get; private set; }
         public List<Member> Admins { get; private set; }
         public List<Guest> MembersInChatroom { get; private set; }
         public List<Message> Messages { get; private set; }
 
-        public Chatroom(Member creator)
+        public Chatroom(Member creator) : this(0, creator, new List<Member>(), new List<Guest>(), new List<Message>()) { }
+
+        public Chatroom(int id, Member creator, List<Member> admins, List<Guest> memebersInChatroom, List<Message> messages)
         {
+            ID = id;
             Creator = creator;
             Admins = new List<Member>();
             MembersInChatroom = new List<Guest>();
