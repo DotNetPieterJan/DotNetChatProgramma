@@ -33,10 +33,9 @@ namespace DBLib.Models
         {
 
         }
-        public void AdminKicksMember(Member member)
+        public void AdminKicksMember(Member memberKicking, Member memberToKick)
         {
-            approvedChatrooms.Remove(CurrentChatroom);
-            
+            CurrentChatroom.RemoveMemberFromChatroom(memberKicking, memberToKick);
         }
         public void AdminDeletesMessage(Message message, Chatroom chatroom)
         {
