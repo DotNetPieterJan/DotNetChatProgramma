@@ -10,11 +10,11 @@ namespace DBLib.Models
     {
         public int ID { get; private set; }
         public int Creator { get; private set; } //ID creator
-        public List<int> Admins { get; private set; } //ID memebers
+        public List<int> Admins { get; private set; } //ID members
         public List<int> MembersInChatroom { get; private set; } //ID members
         public List<Message> Messages { get; private set; }
 
-        public Chatroom(Member creator) : this(0, creator.ID, new List<int>(), new List<int>(), new List<Message>()) { }
+        public Chatroom(Member creator, int id) : this(id, creator.ID, new List<int>(), new List<int>(), new List<Message>()) { }
 
         public Chatroom(int id, int creator, List<int> admins, List<int> memebersInChatroom, List<Message> messages)
         {

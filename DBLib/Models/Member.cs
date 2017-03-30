@@ -8,9 +8,10 @@ namespace DBLib.Models
 {
     public class Member : Guest
     {
+
         public string Password { get; set; }
-        public bool IsOnline { get; set; }
-        private List<int> approvedChatrooms; //ID
+
+        private List<int> approvedChatrooms = new List<int> { 1 }; //ID
         public Member(string username, string password, bool isOnline, List<int> approvedChatrooms)
         {
             Username = username;
@@ -27,7 +28,7 @@ namespace DBLib.Models
             Password = password;
             IsOnline = IsOnline;
         }
-        public void MakeRoom(Member member)
+        public void MakeRoom()
         {
 
         }

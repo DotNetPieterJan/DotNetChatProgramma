@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DBLib.Services;
 
 namespace DBLib.Models
 {
     public class Guest
     {
+        ChatroomsService service = new ChatroomsService();
+
         public int CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
         public int ID { get; set; }
-        public Guest(int currentChatroom, string username, int id)
+        public bool IsOnline { get; set; }
+        public Guest(int currentChatroom, string username, int id, bool isOnline)
         {
             CurrentChatroom = currentChatroom;
-            Username = username;
             ID = id;
+            Username = string.Format("Guest" + ID.ToString());
+            IsOnline = isOnline;
         }
         public Guest()
         {
-            ID = GetAvailableNumber();
-            //select global chatroom
-
+            ID = service.GetHighestUserID();
+            CurrentChatroom = 1;
             Username = string.Format("Guest" + ID.ToString());
+            IsOnline = true;
         }
         public void Register() //converts to Member
         {
