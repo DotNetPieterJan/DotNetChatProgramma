@@ -12,21 +12,10 @@ namespace DBLib.Models
         public string Password { get; set; }
 
         private List<int> approvedChatrooms = new List<int> { 1 }; //ID
-        public Member(string username, string password, bool isOnline, List<int> approvedChatrooms)
+        public Member(int currentChatroom, int id, string username, string password, bool isOnline, List<int> approvedChatrooms) : base(currentChatroom, username, id, isOnline)
         {
-            Username = username;
-            Password = password;
-            IsOnline = IsOnline;
             this.approvedChatrooms = approvedChatrooms;
-            //get highest LID ID from DB, change ID of class
-
             //refill approvedChatrooms
-        }
-        public Member(string username, string password)
-        {
-            Username = username;
-            Password = password;
-            IsOnline = true;
         }
         public void MakeRoom()
         {
