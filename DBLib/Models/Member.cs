@@ -20,9 +20,17 @@ namespace DBLib.Models
         {
 
         }
-        public void ChangePassword(Member member)
+        public void RemoveRoom()
         {
 
+        }
+        public void ChangeUsername(string newUsername)
+        {
+            Username = newUsername;
+        }
+        public void ChangePassword(string newPassword)
+        {
+            service.PasswordUpdateMember(this, newPassword);
         }
         public bool FindUser(Member member)
         {
@@ -30,7 +38,7 @@ namespace DBLib.Models
         }
         public void AdminAddsMember(Member member)
         {
-
+            member.approvedChatrooms.Add(CurrentChatroom);
         }
         public void AdminKicksMember(Member memberKicking, Guest personToKick)
         {

@@ -6,7 +6,7 @@ namespace DBLib.Models
 {
     public class Guest
     {
-        ChatroomsService service = new ChatroomsService();
+        protected ChatroomsService service = new ChatroomsService();
 
         public int CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
@@ -33,6 +33,7 @@ namespace DBLib.Models
             Console.WriteLine("Input your new password: ");
             string password = Console.ReadLine().Trim();
             Member newMember = new Member(CurrentChatroom, ID, username, password, IsOnline, new List<int> { 1 });
+            service.CreateMember(newMember);
         }
         public void SendMessage(string message) //send message to CurrentChatroom
         {

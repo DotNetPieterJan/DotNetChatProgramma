@@ -94,9 +94,39 @@ namespace DBLib.Services
             }
         }
 
-        internal void PasswordUpdateMember(Member member, string newPassword)
+        internal bool PasswordUpdateMember(Member member, string newPassword)
         {
+            using (DbConnection conChat = manager.GetConnection())
+            {
+                conChat.Open();
+                using (DbTransaction traChangePassword = conChat.BeginTransaction(IsolationLevel.ReadCommitted))
+                {
+                    using (DbCommand comChangePassword = conChat.CreateCommand())
+                    {
+                        comChangePassword.Transaction = traChangePassword;
+                        comChangePassword.CommandType = CommandType.Text;
+                        comChangePassword.CommandText = "UPDATE Members SET Password = @password WHERE MemberId = @id";
 
+                        DbParameter parMemberId = comChangePassword.CreateParameter();
+                        parMemberId.ParameterName = "@id";
+                        parMemberId.Value = member.ID;
+                        comChangePassword.Parameters.Add(parMemberId);
+
+                        DbParameter parMemberPassword = comChangePassword.CreateParameter();
+                        parMemberPassword.ParameterName = "@password";
+                        parMemberPassword.Value = member.Password;
+                        comChangePassword.Parameters.Add(parMemberPassword);
+
+                        if (comChangePassword.ExecuteNonQuery() == 0)
+                        {
+                            traChangePassword.Rollback();
+                            return false;
+                        }
+                        traChangePassword.Commit();
+                        return true;
+                    }
+                }
+            }
         }
     }
 }
