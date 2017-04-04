@@ -14,7 +14,7 @@ namespace DBLib.Services
     {
         ChatManager manager = new ChatManager();
 
-        public int GetHighestUserID()
+        internal int GetHighestUserID()
         {
             int id = 0;
             using (DbConnection conChat = manager.GetConnection())
@@ -27,6 +27,11 @@ namespace DBLib.Services
                 }
             }
             return id + 1;
+        }
+
+        internal void SchrijfGuestWeg(Guest guest)
+        {
+            throw new NotImplementedException();
         }
     }
 }

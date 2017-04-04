@@ -12,7 +12,7 @@ namespace DBLib.Models
         public string Username { get; set; } //Guest : random generated username
         public int ID { get; private set; }
         public bool IsOnline { get; set; }
-        public Guest(int currentChatroom, string username, int id, bool isOnline)
+        public Guest(int currentChatroom, int id, string username, bool isOnline)
         {
             CurrentChatroom = 1;
             ID = id;
@@ -38,12 +38,13 @@ namespace DBLib.Models
         {
             Message messageToPush = new Message(this, DateTime.Now, message);
             //CurrentChatroom.AddMessage(messageToPush);
-
         }
-        private int GetAvailableNumber()
+
+        public static void CreateNewGuest()
         {
-            Random rdn = new Random();
-            return rdn.Next(1, 50000);
+            ChatroomsService service = new ChatroomsService();
+            Guest guest = new Guest();
+            service.SchrijfGuestWeg(guest);
         }
     }
 }

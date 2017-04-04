@@ -12,7 +12,7 @@ namespace DBLib.Models
         public string Password { get; set; }
 
         private List<int> approvedChatrooms = new List<int> { 1 }; //ID
-        public Member(int currentChatroom, int id, string username, string password, bool isOnline, List<int> approvedChatrooms) : base(currentChatroom, username, id, isOnline)
+        public Member(int currentChatroom, int id, string username, string password, bool isOnline, List<int> approvedChatrooms) : base(currentChatroom, id, username, isOnline)
         {
             this.approvedChatrooms = approvedChatrooms;
         }
