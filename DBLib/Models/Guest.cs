@@ -13,13 +13,13 @@ namespace DBLib.Models
 
         public int CurrentChatroom { get; set; } //ID
         public string Username { get; set; } //Guest : random generated username
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public bool IsOnline { get; set; }
         public Guest(int currentChatroom, string username, int id, bool isOnline)
         {
-            CurrentChatroom = currentChatroom;
+            CurrentChatroom = 1;
             ID = id;
-            Username = string.Format("Guest" + ID.ToString());
+            Username = username;
             IsOnline = isOnline;
         }
         public Guest()
@@ -35,7 +35,7 @@ namespace DBLib.Models
             string username = Console.ReadLine().Trim();
             Console.WriteLine("Input your new password :");
             string password = Console.ReadLine().Trim();
-            Member newMember = new Member(username, password, true);
+            Member newMember = new Member(username, password);
             //inform DB that this ID is good to clear
             //delete this guest from guestdb
         }

@@ -22,11 +22,11 @@ namespace DBLib.Models
 
             //refill approvedChatrooms
         }
-        public Member(string username, string password, bool isOnline)
+        public Member(string username, string password)
         {
             Username = username;
             Password = password;
-            IsOnline = IsOnline;
+            IsOnline = true;
         }
         public void MakeRoom()
         {
