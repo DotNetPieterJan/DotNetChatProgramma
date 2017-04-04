@@ -31,7 +31,72 @@ namespace DBLib.Services
 
         internal void SchrijfGuestWeg(Guest guest)
         {
-            throw new NotImplementedException();
+            using (DbConnection conChat = manager.GetConnection())
+            {
+                using (DbCommand comSchrijfGuestWeg = conChat.CreateCommand())
+                {
+                    comSchrijfGuestWeg.CommandType = CommandType.Text;
+                    comSchrijfGuestWeg.CommandText = "INSERT [Members] ([MemberId], [Username], [Password], [IsOnline]) VALUES (@id, @username, @password, @isonline)";
+
+                    DbParameter parGuestId = comSchrijfGuestWeg.CreateParameter();
+                    parGuestId.ParameterName = "@id";
+                    parGuestId.Value = guest.ID;
+                    comSchrijfGuestWeg.Parameters.Add(parGuestId);
+
+                    DbParameter parGuestUsername = comSchrijfGuestWeg.CreateParameter();
+                    parGuestUsername.ParameterName = "@username";
+                    parGuestUsername.Value = guest.Username;
+                    comSchrijfGuestWeg.Parameters.Add(parGuestUsername);
+
+                    DbParameter parGuestPassword = comSchrijfGuestWeg.CreateParameter();
+                    parGuestPassword.ParameterName = "@password";
+                    parGuestPassword.Value = null;
+                    comSchrijfGuestWeg.Parameters.Add(parGuestPassword);
+
+                    DbParameter parGuestOnline = comSchrijfGuestWeg.CreateParameter();
+                    parGuestOnline.ParameterName = "@online";
+                    parGuestOnline.Value = guest.IsOnline;
+                    comSchrijfGuestWeg.Parameters.Add(parGuestOnline);
+
+                    conChat.Open();
+                    comSchrijfGuestWeg.ExecuteNonQuery();
+                }
+            }
+        }
+
+        internal void CreateMember(Member member)
+        {
+            using (DbConnection conChat = manager.GetConnection())
+            {
+                using (DbCommand comCreateMember = conChat.CreateCommand())
+                {
+                    comCreateMember.CommandType = CommandType.Text;
+                    comCreateMember.CommandText = "UPDATE Members SET Username = @username AND Password = @password WHERE MemberId = @id";
+
+                    DbParameter parMemberId = comCreateMember.CreateParameter();
+                    parMemberId.ParameterName = "@id";
+                    parMemberId.Value = member.ID;
+                    comCreateMember.Parameters.Add(parMemberId);
+
+                    DbParameter parMemberUsername = comCreateMember.CreateParameter();
+                    parMemberUsername.ParameterName = "@username";
+                    parMemberUsername.Value = member.Username;
+                    comCreateMember.Parameters.Add(parMemberUsername);
+
+                    DbParameter parMemberPassword = comCreateMember.CreateParameter();
+                    parMemberPassword.ParameterName = "@password";
+                    parMemberPassword.Value = member.Password;
+                    comCreateMember.Parameters.Add(parMemberPassword);
+
+                    conChat.Open();
+                    comCreateMember.ExecuteNonQuery();
+                }
+            }
+        }
+
+        internal void PasswordUpdateMember(Member member, string newPassword)
+        {
+
         }
     }
 }
