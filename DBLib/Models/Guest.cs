@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DBLib.Services;
 
 namespace DBLib.Models
@@ -33,11 +30,9 @@ namespace DBLib.Models
         {
             Console.WriteLine("Input your new username: ");
             string username = Console.ReadLine().Trim();
-            Console.WriteLine("Input your new password :");
+            Console.WriteLine("Input your new password: ");
             string password = Console.ReadLine().Trim();
-            Member newMember = new Member(username, password);
-            //inform DB that this ID is good to clear
-            //delete this guest from guestdb
+            Member newMember = new Member(username, password, IsOnline, new List<int> { 1 });
         }
         public void SendMessage(string message) //send message to CurrentChatroom
         {
