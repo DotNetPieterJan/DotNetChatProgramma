@@ -15,7 +15,6 @@ namespace DBLib.Models
         public Member(int currentChatroom, int id, string username, string password, bool isOnline, List<int> approvedChatrooms) : base(currentChatroom, username, id, isOnline)
         {
             this.approvedChatrooms = approvedChatrooms;
-            //refill approvedChatrooms
         }
         public void MakeRoom()
         {

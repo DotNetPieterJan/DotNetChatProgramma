@@ -32,7 +32,7 @@ namespace DBLib.Models
             string username = Console.ReadLine().Trim();
             Console.WriteLine("Input your new password: ");
             string password = Console.ReadLine().Trim();
-            Member newMember = new Member(username, password, IsOnline, new List<int> { 1 });
+            Member newMember = new Member(CurrentChatroom, ID, username, password, IsOnline, new List<int> { 1 });
         }
         public void SendMessage(string message) //send message to CurrentChatroom
         {
